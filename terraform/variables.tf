@@ -1,24 +1,25 @@
 variable "aws_region" {
-  description = "AWS region for the EKS cluster"
+  description = "The AWS region to deploy to"
+  type        = string
   default     = "us-east-1"
 }
 
 variable "cluster_name" {
-  description = "Name of the EKS cluster"
-  default     = "bookstack-ci-cluster"
+  description = "The name of the EKS cluster"
+  type        = string
 }
 
-variable "node_group_name" {
-  description = "Name of the node group"
-  default     = "bookstack-ci-node-group"
+variable "vpc_id" {
+  description = "The VPC ID for the EKS cluster"
+  type        = string
 }
 
-variable "node_instance_type" {
-  description = "EC2 instance type for nodes"
-  default     = "t3.medium"
+variable "subnet_ids" {
+  description = "List of subnet IDs for the EKS cluster"
+  type        = list(string)
 }
 
-variable "desired_capacity" {
-  description = "Number of worker nodes"
-  default     = 1
+variable "key_name" {
+  description = "SSH key name for the nodes"
+  type        = string
 }
