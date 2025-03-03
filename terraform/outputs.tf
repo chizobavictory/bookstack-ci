@@ -17,3 +17,7 @@ output "kubeconfig" {
   description = "Kubeconfig for EKS cluster"
   value       = module.eks.kubeconfig
 }
+
+output "ecr_repository_url" {
+  value = aws_ecr_repository.bookstack_repo.repository_url
+}
