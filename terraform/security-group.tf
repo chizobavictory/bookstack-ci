@@ -1,5 +1,5 @@
 resource "aws_security_group" "eks_cluster_sg" {
-  vpc_id = var.vpc_id
+  vpc_id = module.vpc.vpc_id
   name   = "eks-cluster-sg"
 
   ingress {

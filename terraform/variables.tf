@@ -31,16 +31,6 @@ variable "environment" {
   type        = string
 }
 
-variable "vpc_id" {
-  description = "The VPC ID for the EKS cluster"
-  type        = string
-}
-
-variable "subnet_ids" {
-  description = "List of subnet IDs for the EKS cluster"
-  type        = list(string)
-}
-
 variable "key_name" {
   description = "SSH key name for the nodes"
   type        = string
