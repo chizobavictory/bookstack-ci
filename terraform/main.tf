@@ -1,21 +1,6 @@
-terraform {
-  required_version = ">= 1.6.0"
-
-  required_providers {
-    aws = {
-      source  = "hashicorp/aws"
-      version = "~> 5.0"
-    }
-  }
-}
-
-provider "aws" {
-  region = var.aws_region
-}
-
 module "eks" {
   source          = "terraform-aws-modules/eks/aws"
-  version         = "19.17.0" # Make sure you're using a recent version
+  version         = "19.17.0" 
   cluster_name    = var.cluster_name
   cluster_version = "1.27"
   subnet_ids      = var.subnet_ids
