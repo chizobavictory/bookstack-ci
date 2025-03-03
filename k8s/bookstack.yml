@@ -51,7 +51,7 @@ spec:
     spec:
       containers:
         - name: bookstack-backend
-          image: <AWS_ACCOUNT_ID>.dkr.ecr.<AWS_REGION>.amazonaws.com/bookstack-ci-backend:latest
+          image: 905418341123.dkr.ecr.us-east-1.amazonaws.com/bookstack-ci-backend:version-1.0.0
           imagePullPolicy: Always
           ports:
             - containerPort: 5000

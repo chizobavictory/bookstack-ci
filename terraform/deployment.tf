@@ -23,7 +23,7 @@ resource "kubernetes_deployment" "bookstack" {
       spec {
         container {
           name  = "bookstack-backend"
-          image = "${aws_ecr_repository.bookstack_repo.repository_url}:latest"
+          image = "${aws_ecr_repository.bookstack_repo.repository_url}:version-1.0.0"
 
           port {
             container_port = 5000

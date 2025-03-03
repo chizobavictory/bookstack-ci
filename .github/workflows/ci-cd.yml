@@ -8,7 +8,6 @@ on:
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -17,7 +16,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 18
-          cache: 'yarn'
+          cache: yarn
 
       - name: Install dependencies
         run: yarn install --frozen-lockfile
@@ -31,7 +30,6 @@ jobs:
   deploy:
     needs: build-and-test
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -53,8 +51,22 @@ jobs:
           docker tag bookstack-ci-backend:latest ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.us-east-1.amazonaws.com/bookstack-ci-backend:latest
           docker push ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.us-east-1.amazonaws.com/bookstack-ci-backend:latest
 
-      - name: Update Kubernetes deployment
-        run: |
-          aws eks --region us-east-1 update-kubeconfig --name bookstack-cluster
-          kubectl apply -f k8s/deployment.yaml
-          kubectl apply -f k8s/service.yaml
+      - name: Terraform Init
+        working-directory: terraform
+        run: terraform init -input=false
+
+      - name: Terraform Plan
+        working-directory: terraform
+        run: terraform plan -input=false \
+          -var "mongo_uri=${{ secrets.MONGO_URI }}" \
+          -var "jwt_secret=${{ secrets.JWT_SECRET }}" \
+          -var "aws_account_id=${{ secrets.AWS_ACCOUNT_ID }}" \
+          -var "environment=prod"
+
+      - name: Terraform Apply
+        working-directory: terraform
+        run: terraform apply -input=false -auto-approve \
+          -var "mongo_uri=${{ secrets.MONGO_URI }}" \
+          -var "jwt_secret=${{ secrets.JWT_SECRET }}" \
+          -var "aws_account_id=${{ secrets.AWS_ACCOUNT_ID }}" \
+          -var "environment=prod"
