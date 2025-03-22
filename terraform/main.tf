@@ -1,6 +1,6 @@
 module "vpc" {
   source  = "terraform-aws-modules/vpc/aws"
-  version = "3.18.0"
+  version = "4.0.0" # or a higher 4.x/5.x version that doesn’t reference ClassicLink
 
   name = "bookstack-vpc"
   cidr = "10.0.0.0/16"
@@ -16,6 +16,8 @@ module "vpc" {
     Name = "bookstack-vpc"
   }
 }
+
+
 
 module "eks" {
   source          = "terraform-aws-modules/eks/aws"

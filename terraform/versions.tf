@@ -1,10 +1,10 @@
 # Terraform Settings Block
 terraform {
-  required_version = ">= 1.6.0"
+  required_version = ">= 1.0"
   required_providers {
     aws = {
       source  = "hashicorp/aws"
-      version = ">= 5.31"
+      version = ">= 5.79"
     }
 
     kubernetes = {
@@ -16,16 +16,6 @@ terraform {
     docker = {
       source  = "kreuzwerker/docker"
       version = "3.0.2"
-    }
-
-    time = {
-      source  = "hashicorp/time"
-      version = "~> 0.7"
-    }
-
-    null = {
-      source  = "hashicorp/null"
-      version = "~> 3.0"
     }
   }
 }
