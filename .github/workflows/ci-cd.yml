@@ -49,8 +49,8 @@ jobs:
       - name: Build, tag, and push Docker image to ECR
         run: |
           docker build -t bookstack-ci-backend .
-          docker tag bookstack-ci-backend:latest ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.us-east-1.amazonaws.com/bookstack-ci-backend:latest
-          docker push ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.us-east-1.amazonaws.com/bookstack-ci-backend:latest
+          docker tag bookstack-ci-backend:latest 905418341123.dkr.ecr.us-east-1.amazonaws.com/bookstack-ci-backend:latest
+          docker push 905418341123.dkr.ecr.us-east-1.amazonaws.com/bookstack-ci-backend:latest
 
       - name: Terraform Init
         working-directory: terraform
